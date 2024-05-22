@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import Header from './components/Header';
+import Body from './components/Body';
+import StatusContext from './components/utils/context/StatusContext';
+import './index.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [status, setStatus] = useState({ grouping: "status", ordering: "priority" });
+   useEffect(() => {
+      if (localStorage.getItem("status"))
+         setStatus(JSON.parse(localStorage.getItem("status")));
+   }, []);
+   return (
+      <StatusContext.Provider value={{ status, setStatus }}>
+         <Header />
+         <Body />
+      </StatusContext.Provider>
+   );
 }
 
 export default App;

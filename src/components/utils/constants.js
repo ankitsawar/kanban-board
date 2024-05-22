@@ -1,0 +1,1 @@
+export const statuses = ['Backlog', 'Todo', 'In progress', 'Done', 'Canceled'];
