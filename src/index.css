@@ -152,6 +152,7 @@ select:focus {
    display: flex;
    align-items: center;
    margin-bottom: 10px;
+   position: relative;
 }
 
 .ticket>div {
@@ -164,6 +165,8 @@ select:focus {
    line-height: normal;
    font-weight: normal;
    color: #9d9fa3;
+   margin: 0;
+   padding-bottom: 8px;
 }
 
 .ticket-title {
@@ -218,6 +221,38 @@ select:focus {
    overflow-y: auto;
 }
 
+.user-status-wrap {
+   position: absolute;
+   right: 15px;
+   top: 15px;
+}
+
+.user-status-wrap .initials {
+   width: 20px;
+   height: 20px;
+   border-radius: 10px;
+   border: 1px solid #eeeeee;
+   text-align: center;
+   font-size: 10px;
+   line-height: 20px;
+   text-transform: uppercase;
+}
+
+.user-status-wrap .availability {
+   width: 8px;
+   height: 8px;
+   border-radius: 4px;
+   border: 1px solid #eeeeee;
+   position: absolute;
+   bottom: -4px;
+   right: 0px;
+   background-color: #B8B8B8;
+}
+
+.user-status-wrap .availability.active {
+   background-color: #F2BE00;
+}
+
 @media(max-width: 991px) {
    .kanbans-wrapper {
       flex-direction: column;
@@ -265,4 +300,11 @@ select:focus {
 
 .no-scrollbar::-khtml-scrollbar {
    display: none;
+}
+
+.icon-wrap .user-status-wrap {
+   position: relative;
+   top: auto;
+   right: auto;
+   margin-right: 8px;
 }

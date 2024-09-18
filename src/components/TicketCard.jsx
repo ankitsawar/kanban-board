@@ -1,5 +1,6 @@
 import { ReactComponent as UrgentPriorityIcon } from "../assets/SVG-Urgent-Priority-grey.svg";
-const TicketCard = ({ ticket }) => {
+import UserStatus from "./UserStatus";
+const TicketCard = ({ ticket, users }) => {
    return (
       <div className="ticket" key={ticket.id}>
          <div>
@@ -15,6 +16,7 @@ const TicketCard = ({ ticket }) => {
                   Feature Request
                </div>
             </div>
+            <UserStatus userId={ticket.userId} users={users} />
          </div>
       </div>
    )

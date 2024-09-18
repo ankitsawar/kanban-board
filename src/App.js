@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Body from './components/Body';
-import StatusContext from './components/utils/context/StatusContext';
+import StatusContext, { StatusProvider } from './components/utils/context/StatusContext';
 import './index.css';
 
 function App() {
-   const [status, setStatus] = useState({ grouping: "status", ordering: "priority" });
-   useEffect(() => {
-      if (localStorage.getItem("status"))
-         setStatus(JSON.parse(localStorage.getItem("status")));
-   }, []);
+
+   // const [status, setStatus] = useState({ grouping: "status", ordering: "priority" });
+   // useEffect(() => {
+   //    if (localStorage.getItem("status"))
+   //       setStatus(JSON.parse(localStorage.getItem("status")));
+   // }, []);
    return (
-      <StatusContext.Provider value={{ status, setStatus }}>
+      <StatusProvider>
          <Header />
          <Body />
-      </StatusContext.Provider>
+      </StatusProvider>
    );
 }
 

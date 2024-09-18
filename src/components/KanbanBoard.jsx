@@ -12,6 +12,7 @@ import { ReactComponent as LowIcon } from '../assets/Img - Low Priority.svg';
 import TicketCard from "./TicketCard";
 import { useContext } from "react";
 import StatusContext from "./utils/context/StatusContext";
+import { getColor } from "./utils/constants";
 
 const KanbanBoard = ({ title, tickets, users }) => {
    const { status } = useContext(StatusContext);
@@ -28,11 +29,28 @@ const KanbanBoard = ({ title, tickets, users }) => {
       "Low": <LowIcon />
    }
 
+   const getUser = () => {
+
+      const initials = title.split(" ");
+      return initials.length > 1 ? initials[0].charAt(0) + "" + initials[initials.length - 1].charAt(0) : initials[0].charAt(0)
+   }
+
+   const renderIcon = () => {
+      if (status.grouping === "status" || status.grouping === "priority")
+         return Icons[title];
+      else if (status.grouping === "user")
+         return <div className="user-status-wrap">
+            <div className="initials" style={{ backgroundColor: getColor() }}>{getUser()}</div>
+         </div>
+   }
    return (
       <div className="kanbans-wrap no-scrollbar">
          <div className="kanban-header">
-            <div>
-               {Icons[title]} {title} <span className="counter">{tickets?.length}</span>
+            <div className="icon-wrap">
+               {
+                  renderIcon()
+               }
+               {title} <span className="counter">{tickets?.length}</span>
             </div>
             <div>
                <a><AddIcon /></a>
@@ -42,7 +60,7 @@ const KanbanBoard = ({ title, tickets, users }) => {
          <div className="kanban-card no-scrollbar">
             {
                tickets && tickets.map((ticket) =>
-                  <TicketCard key={ticket.id} ticket={ticket} />
+                  <TicketCard key={ticket.id} ticket={ticket} users={users} />
                )
             }
          </div>

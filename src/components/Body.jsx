@@ -6,10 +6,9 @@ import { statuses } from './utils/constants';
 
 const Body = () => {
 
+   const { status } = useContext(StatusContext);
    const boardData = useApiData();
    const [kanbanBoard, setKanbanBoard] = useState([]);
-   const { status } = useContext(StatusContext);
-
    const ticketByStatus = (data, ordering) => {
       const sortedTickets = statuses.reduce((acc, status) => {
          acc[status] = data
@@ -86,6 +85,7 @@ const Body = () => {
             setKanbanBoard(ticketByPriority(boardData, status.ordering));
       }
    }, [status, boardData]);
+
    return (
       <div className='kanbans-wrapper'>
          {
